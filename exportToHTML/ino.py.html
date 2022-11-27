@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>ino.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #629755; font-style: italic;}
+.s3 { color: #6a8759;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ino.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">pygame</span>
+<span class="s0">class </span><span class="s1">Ino(pygame.sprite.Sprite):</span>
+    <span class="s2">&quot;Класс одного пришельца&quot;</span>
+    <span class="s0">def </span><span class="s1">__int__(self</span><span class="s0">, </span><span class="s1">screen):</span>
+        <span class="s2">&quot;Инициализируем и задаем начальную позицию&quot;</span>
+        <span class="s1">super(Ino</span><span class="s0">, </span><span class="s1">self). __init__()</span>
+        <span class="s1">self.image = pygame.image.load(</span><span class="s3">&quot;image/pixil-frame-1.png&quot;</span><span class="s1">)</span>
+        <span class="s1">self.rect = self.image.get_rect()</span>
+        <span class="s1">self.rect.x = self.rect.width</span>
+        <span class="s1">self.rect.y = self.rect.height</span>
+        <span class="s1">self.x = float(self.rect.x)</span>
+        <span class="s1">self.y = float(self.rect.y)</span>
+    <span class="s0">def </span><span class="s1">draw(self):</span>
+        <span class="s2">&quot;Выводи пришельца на экран&quot;</span>
+        <span class="s1">self.screen.blit(self.image</span><span class="s0">, </span><span class="s1">self.rect)</span>
+
+    <span class="s0">def </span><span class="s1">update(self):</span>
+        <span class="s2">&quot;Перемещает пришельцев&quot;</span>
+        <span class="s1">self.y += </span><span class="s4">0.1</span>
+        <span class="s1">self.rect.y = self.y</span></pre>
+</body>
+</html>

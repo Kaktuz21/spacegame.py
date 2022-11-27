@@ -1,0 +1,39 @@
+<html>
+<head>
+<title>scores.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #629755; font-style: italic;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+scores.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">pygame.font</span>
+
+<span class="s0">class </span><span class="s1">Scores():</span>
+    <span class="s2">&quot;Вывод игровой информации&quot;</span>
+    <span class="s0">def </span><span class="s1">__int__(self</span><span class="s0">, </span><span class="s1">screen</span><span class="s0">, </span><span class="s1">stats):</span>
+        <span class="s2">&quot;Инициализируем подсчет очков&quot;</span>
+        <span class="s1">self.screen = screen</span>
+        <span class="s1">self.screen_rect = screen.get_rect()</span>
+        <span class="s1">self.stats = stats</span>
+        <span class="s1">self.text_color = (</span><span class="s3">180</span><span class="s0">, </span><span class="s3">230</span><span class="s0">, </span><span class="s3">29</span><span class="s1">)</span>
+        <span class="s1">self.font = pygame.font.SysFont(</span><span class="s0">None, </span><span class="s3">36</span><span class="s1">)</span>
+        <span class="s1">self.image_score()</span>
+
+
+    <span class="s0">def </span><span class="s1">image_score(self):</span>
+        <span class="s2">&quot;Преобразывает текст счета в графическое изображение&quot;</span>
+        <span class="s1">self.score_img = self.font.render(str(self.stats.score)</span><span class="s0">,True, </span><span class="s1">self</span><span class="s0">,</span><span class="s1">text_color</span><span class="s0">, </span><span class="s1">(</span><span class="s3">0</span><span class="s0">, </span><span class="s3">0 </span><span class="s0">, </span><span class="s3">0</span><span class="s1">)))</span>
+        <span class="s1">self.score_rect.right = self.screen_rect.right - </span><span class="s3">40</span>
+        <span class="s1">self.score_rect.top = </span><span class="s3">20</span>
+</pre>
+</body>
+</html>

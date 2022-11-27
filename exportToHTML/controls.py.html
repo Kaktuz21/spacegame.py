@@ -1,0 +1,108 @@
+<html>
+<head>
+<title>controls.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #629755; font-style: italic;}
+.s3 { color: #808080;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+controls.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">pygame</span><span class="s0">, </span><span class="s1">sys</span>
+<span class="s0">from </span><span class="s1">bullet </span><span class="s0">import </span><span class="s1">Bullet</span>
+<span class="s0">from </span><span class="s1">ino </span><span class="s0">import </span><span class="s1">Ino</span>
+<span class="s0">import  </span><span class="s1">time</span>
+<span class="s0">def </span><span class="s1">events(screen</span><span class="s0">, </span><span class="s1">gun</span><span class="s0">, </span><span class="s1">ino</span><span class="s0">, </span><span class="s1">bullets):</span>
+    <span class="s2">&quot;обработка событий&quot;</span>
+    <span class="s0">for </span><span class="s1">event </span><span class="s0">in </span><span class="s1">pygame.event.get():</span>
+        <span class="s0">if </span><span class="s1">event.type == pygame.QUIT:</span>
+            <span class="s1">sys.exit()</span>
+        <span class="s0">elif </span><span class="s1">event.type == pygame.KEYDOWN:</span>
+            <span class="s3">#вправо</span>
+            <span class="s0">if </span><span class="s1">events.key == pygame.K_d:</span>
+                <span class="s1">gun.right = </span><span class="s0">True</span>
+        <span class="s0">elif </span><span class="s1">events.key == pygame.K_a:</span>
+                <span class="s1">gun.left = </span><span class="s0">True</span>
+        <span class="s0">elif </span><span class="s1">event.key == pygame.K_SPACE:</span>
+            <span class="s1">new_bullet = Bullet(screen</span><span class="s0">, </span><span class="s1">gun)</span>
+            <span class="s1">bullets.add(new_bullet)</span>
+        <span class="s0">elif </span><span class="s1">events.type == pygame.KEYUP:</span>
+            <span class="s3">#вправо</span>
+            <span class="s0">if </span><span class="s1">events.key == pygame.K_d:</span>
+                <span class="s1">gun.right = </span><span class="s0">False</span>
+        <span class="s0">elif </span><span class="s1">events.key == pygame.K_a:</span>
+            <span class="s1">gun.left = </span><span class="s0">False</span>
+<span class="s0">def </span><span class="s1">update(bg_color</span><span class="s0">, </span><span class="s1">screen</span><span class="s0">, </span><span class="s1">gun</span><span class="s0">, </span><span class="s1">bullets):</span>
+    <span class="s2">&quot;Обновление экрана&quot;</span>
+    <span class="s1">scren.fill(bg_color)</span>
+    <span class="s0">for </span><span class="s1">bullet </span><span class="s0">in </span><span class="s1">bullets.sprite():</span>
+        <span class="s1">gun.output()</span>
+        <span class="s1">ino.draw(screen)</span>
+    <span class="s1">pygame.display.flip()</span>
+<span class="s0">def </span><span class="s1">update_bullets(inos</span><span class="s0">, </span><span class="s1">bullets):</span>
+    <span class="s2">&quot;Обновлять позиции пуль&quot;</span>
+    <span class="s1">bullet.update()</span>
+    <span class="s0">for </span><span class="s1">bullet </span><span class="s0">in </span><span class="s1">bullet.copy():</span>
+        <span class="s0">if </span><span class="s1">bullet.rect.bottom &lt;= </span><span class="s4">0</span><span class="s1">:</span>
+            <span class="s1">bullet.remove(bullet)</span>
+    <span class="s1">collisions = pygame.sprite.groupcollide(bullets</span><span class="s0">, </span><span class="s1">inos</span><span class="s0">, True, True</span><span class="s1">)</span>
+    <span class="s0">if </span><span class="s1">len(inos) == </span><span class="s4">0</span><span class="s1">:</span>
+        <span class="s1">bullets.empty()</span>
+        <span class="s1">create_army(screen</span><span class="s0">, </span><span class="s1">inos)</span>
+
+<span class="s0">def </span><span class="s1">gun_kill(stats</span><span class="s0">, </span><span class="s1">screen</span><span class="s0">, </span><span class="s1">gun</span><span class="s0">, </span><span class="s1">inos</span><span class="s0">, </span><span class="s1">bullets):</span>
+    <span class="s2">&quot;Столкновение пушки и армии&quot;</span>
+    <span class="s0">if </span><span class="s1">stats.guns_left &gt; </span><span class="s4">0</span><span class="s1">:</span>
+        <span class="s1">stats.guns_left = </span><span class="s4">1</span>
+        <span class="s1">inos.empty()</span>
+        <span class="s1">bullets.empty()</span>
+        <span class="s1">create_army(screen</span><span class="s0">, </span><span class="s1">inos)</span>
+        <span class="s1">gun.create_gun()</span>
+        <span class="s1">time.sleep(</span><span class="s4">1</span><span class="s1">)</span>
+    <span class="s0">else</span><span class="s1">:</span>
+        <span class="s1">stats.run_game = </span><span class="s0">False</span>
+        <span class="s1">sys.exit()</span>
+
+<span class="s0">def </span><span class="s1">update_inos(stats</span><span class="s0">, </span><span class="s1">screen</span><span class="s0">, </span><span class="s1">gun</span><span class="s0">, </span><span class="s1">inos</span><span class="s0">, </span><span class="s1">bullets):</span>
+    <span class="s2">&quot;Обновляет позицию пришельцев&quot;</span>
+    <span class="s1">inos.update()</span>
+    <span class="s0">if </span><span class="s1">pygame.sprite.spritecollideany(gun</span><span class="s0">, </span><span class="s1">inos):</span>
+        <span class="s1">gun_kill(stats</span><span class="s0">,</span><span class="s1">screen</span><span class="s0">, </span><span class="s1">gun</span><span class="s0">, </span><span class="s1">inos</span><span class="s0">, </span><span class="s1">bullets)</span>
+    <span class="s1">inos_check(stats</span><span class="s0">, </span><span class="s1">screen</span><span class="s0">, </span><span class="s1">gun</span><span class="s0">, </span><span class="s1">inos</span><span class="s0">, </span><span class="s1">bullets)</span>
+
+<span class="s0">def  </span><span class="s1">inos_check(stats</span><span class="s0">, </span><span class="s1">screen</span><span class="s0">, </span><span class="s1">gun</span><span class="s0">, </span><span class="s1">inos</span><span class="s0">, </span><span class="s1">bullets):</span>
+    <span class="s2">&quot;Проверка, добралась ли армия до края экрана&quot;</span>
+    <span class="s1">screen_rect = screen.get_rect()</span>
+    <span class="s0">for </span><span class="s1">ino </span><span class="s0">in </span><span class="s1">inos.sprites():</span>
+        <span class="s0">if </span><span class="s1">ino.rect.bottom &gt;= screen_rect.bottom:</span>
+            <span class="s1">gun_kill(stats</span><span class="s0">, </span><span class="s1">screen</span><span class="s0">, </span><span class="s1">gun</span><span class="s0">, </span><span class="s1">inos</span><span class="s0">, </span><span class="s1">bullets)</span>
+            <span class="s0">break</span>
+
+<span class="s0">def </span><span class="s1">create_army(screen</span><span class="s0">, </span><span class="s1">inos):</span>
+    <span class="s2">&quot;Создание армии пришельцев&quot;</span>
+    <span class="s1">ino= Ino(screen)</span>
+    <span class="s1">ino_width = ino.rect.width</span>
+    <span class="s1">number_ino_x = ((</span><span class="s4">700 </span><span class="s1">- </span><span class="s4">2 </span><span class="s1">* ino_width)/ino_width)</span>
+    <span class="s1">ino_height = ino.rect.height</span>
+    <span class="s1">number_ino_y = int((</span><span class="s4">800 </span><span class="s1">- </span><span class="s4">100 </span><span class="s1">- </span><span class="s4">2 </span><span class="s1">* ino_height)/ino_height)</span>
+
+<span class="s0">for </span><span class="s1">row_number </span><span class="s0">in </span><span class="s1">range(number_ino_y - </span><span class="s4">1</span><span class="s1">):</span>
+
+    <span class="s0">for </span><span class="s1">ino_number </span><span class="s0">in </span><span class="s1">range(number_ino_y):</span>
+        <span class="s1">ino = Ino(screen)</span>
+        <span class="s1">ino.x = ino_width + (ino_width * ino_width)</span>
+        <span class="s1">ino.y = ino_height + (ino_height * row_number)</span>
+        <span class="s1">ino.rect.x = ino.x</span>
+        <span class="s1">ino.rect.y = ino.rect.height + (ino.rect.height * row_number)</span>
+        <span class="s1">inos.add(ino)</span>
+</pre>
+</body>
+</html>

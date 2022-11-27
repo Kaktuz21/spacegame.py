@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>stats.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #629755; font-style: italic;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+stats.py</font>
+</center></td></tr></table>
+<pre><span class="s0">class </span><span class="s1">Stats():</span>
+    <span class="s2">&quot;Отслеживание статистики&quot;</span>
+
+    <span class="s0">def </span><span class="s1">__int__(self):</span>
+        <span class="s2">&quot;Инициализирует статистику&quot;</span>
+        <span class="s1">self.reset_stats()</span>
+        <span class="s1">self.run_game = </span><span class="s0">True</span>
+
+    <span class="s0">def </span><span class="s1">reset_stats(self):</span>
+        <span class="s2">&quot;Статистика, изменяющаяся во время игры&quot;</span>
+        <span class="s1">self.guns_left = </span><span class="s3">2</span>
+        <span class="s1">self.score = </span><span class="s3">0</span></pre>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>bullet.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #629755; font-style: italic;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+bullet.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">pygame</span>
+<span class="s0">class </span><span class="s1">Bullet(pygame.sprite.Sprite):</span>
+    <span class="s0">def </span><span class="s1">__init__(self</span><span class="s0">, </span><span class="s1">screen</span><span class="s0">, </span><span class="s1">gun):</span>
+        <span class="s2">&quot;Создаем пули в позиции пушки&quot;</span>
+        <span class="s1">super(Bullet</span><span class="s0">, </span><span class="s1">self).__init__()</span>
+        <span class="s1">self.screen = screen</span>
+        <span class="s1">self.rect = pygame.Rect(</span><span class="s3">0</span><span class="s0">, </span><span class="s3">0</span><span class="s0">, </span><span class="s3">12</span><span class="s1">)</span>
+        <span class="s1">self.color = </span><span class="s3">180</span><span class="s0">, </span><span class="s3">230</span><span class="s0">, </span><span class="s3">29</span>
+        <span class="s1">self.spees = </span><span class="s3">4.5</span>
+        <span class="s1">self.rect.center = gun.rect.center</span>
+        <span class="s1">self.rect.top = gun.rect.top</span>
+        <span class="s1">self.y = float(self.rect.y)</span>
+
+    <span class="s0">def </span><span class="s1">upgate(self):</span>
+        <span class="s2">&quot;Перемещение пули вверх&quot;</span>
+        <span class="s1">self.y -= self.speed</span>
+        <span class="s1">self.rect.y = self.y</span>
+
+    <span class="s0">def </span><span class="s1">draw_bullet(self):</span>
+        <span class="s2">&quot;Рисуем пулю на экране&quot;</span>
+        <span class="s1">pygame.draw.rect(self.screen</span><span class="s0">, </span><span class="s1">self.color</span><span class="s0">, </span><span class="s1">self.rect)</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>spacegame.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+spacegame.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">pygame</span>
+<span class="s0">import </span><span class="s1">controls</span>
+<span class="s0">import </span><span class="s1">sys</span>
+<span class="s0">from </span><span class="s1">gun </span><span class="s0">import </span><span class="s1">Gun</span>
+<span class="s0">from </span><span class="s1">pygame.sprite </span><span class="s0">import </span><span class="s1">Group</span>
+<span class="s0">from </span><span class="s1">stats </span><span class="s0">import </span><span class="s1">Stats</span>
+
+
+<span class="s0">def </span><span class="s1">run():</span>
+    <span class="s1">pygame.init()</span>
+
+    <span class="s1">screen = pygame.display.set_mode((</span><span class="s2">700</span><span class="s0">, </span><span class="s2">800</span><span class="s1">))</span>
+    <span class="s1">pygame.display.set_caption(</span><span class="s3">&quot;Космические защитники&quot;</span><span class="s1">)</span>
+    <span class="s1">bg_color = (</span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s1">)</span>
+    <span class="s1">gun = Gun(screen)</span>
+    <span class="s1">bullet = Group()</span>
+    <span class="s1">inos = Group()</span>
+    <span class="s1">controls.create_army(screen</span><span class="s0">, </span><span class="s1">inos)</span>
+    <span class="s1">stats = Stats()</span>
+
+    <span class="s0">while True</span><span class="s1">:</span>
+        <span class="s1">controls.events(gun</span><span class="s0">, </span><span class="s1">screen</span><span class="s0">, </span><span class="s1">bullets)</span>
+        <span class="s0">if </span><span class="s1">stats.run_game:</span>
+            <span class="s1">gun.update_gun()</span>
+            <span class="s1">controls.update(bg_color</span><span class="s0">, </span><span class="s1">screen</span><span class="s0">, </span><span class="s1">gun</span><span class="s0">, </span><span class="s1">bullets)</span>
+            <span class="s1">controls.update_bullets(inos</span><span class="s0">, </span><span class="s1">bullets)</span>
+            <span class="s1">controls.update_inos(stats</span><span class="s0">, </span><span class="s1">screen</span><span class="s0">, </span><span class="s1">gun</span><span class="s0">, </span><span class="s1">inos</span><span class="s0">, </span><span class="s1">bullets)</span>
+<span class="s1">run()</span></pre>
+</body>
+</html>
